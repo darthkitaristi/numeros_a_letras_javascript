@@ -120,11 +120,17 @@
   
     }
 
+    function replaceAll( text, busca, reemplaza ){
+        while (text.toString().indexOf(busca) != -1)
+            text = text.toString().replace(busca,reemplaza);
+        return text;
+      }
+
     function numberToWords(number){
         
         let vector = convertStringToVector(number);
-       
         let resul = '';   
+
             switch (vector.length) {
                 case 1:
                     resul = (convertCentena(number))
@@ -151,7 +157,7 @@
             default:
                 let complete = [];
                 vector.reverse();
-            
+                
                 for(let i = 0; i < vector.length; i++) {
                     for (let j = i+1; j < i+2; j++) {
                         
@@ -180,7 +186,8 @@
                     }
                 }
                 
-                resul = (complete.toString().replace(',',' '))
+                resul = complete.toString();
+                resul = replaceAll(resul,',',' ');
                 break;
             }
         return resul;
@@ -192,7 +199,7 @@
         
             number = number.split('.')
             if (number.length > 1) {
-                return numberToWords(number[0]) + ' con  ' + numberToWords(number[1])   
+                return numberToWords(number[0]) + ' con ' + numberToWords(number[1])   
             }else{
                 return numberToWords(number[0])   
             }
@@ -202,10 +209,10 @@
             return 'Numero supera a 10^120'
         }
     }
+    console.log(input('33333.3333'));  
 
                    
     
-console.log(input('33333.3333')); 
 
 
 
